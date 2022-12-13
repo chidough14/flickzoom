@@ -1,15 +1,23 @@
 import { EuiFlexGroup, EuiProvider, EuiFlexItem, EuiImage, EuiSpacer, EuiText, EuiTextColor, EuiButton, EuiPanel } from '@elastic/eui'
 import React from 'react'
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from 'firebase/auth'
 import { query, where, getDocs, addDoc } from 'firebase/firestore'
 import animation from '../assets/animation.gif'
 import logo from '../assets/logo.png'
 import { firebaseAuth, userRef } from '../utils/FirebaseConfig'
 import { useNavigate } from 'react-router-dom'
+import { useAppDispatch } from '../app/hooks'
+import { setUser } from '../app/slices/AuthSlice'
 
 
 const Login = () => {
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+
+  onAuthStateChanged(firebaseAuth, (currentUser) => {
+    console.log(currentUser);
+    if (currentUser) navigate("/")
+  })
 
   const login = async () => {
     const provider = new GoogleAuthProvider()
@@ -28,6 +36,7 @@ const Login = () => {
       }
     }
 
+    dispatch(setUser({ uid, name: displayName, email}))
     navigate("/")
   }
 
