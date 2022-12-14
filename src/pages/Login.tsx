@@ -15,7 +15,6 @@ const Login = () => {
   const dispatch = useAppDispatch()
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
-    console.log(currentUser);
     if (currentUser) navigate("/")
   })
 
