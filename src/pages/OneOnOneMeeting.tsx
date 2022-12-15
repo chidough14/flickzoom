@@ -11,6 +11,7 @@ import MeetingUsersField from '../components/FormComponents/MeetingUsersField'
 import Header from '../components/Header'
 import useAuth from '../hooks/useAuth'
 import useFetchUsers from '../hooks/useFetchUsers'
+import useToast from '../hooks/useToast'
 import { meetingsRef } from '../utils/FirebaseConfig'
 import { generateMeetingId } from '../utils/generateMeetingId'
 import { FieldErrorType, UserType } from '../utils/Types'
@@ -20,6 +21,7 @@ const OneOnOneMeeting = () => {
   const uid = useAppSelector((state) => state.auth.userInfo?.uid)
   const navigate = useNavigate()
   const [users] = useFetchUsers()
+  const [createToast] = useToast()
   const [meetingName, setMeetingName] = useState("")
   const [selectedUsers, setSelectedUsers] = useState<Array<UserType>>([])
   const [startDate, setStartDate] = useState(moment())
@@ -80,6 +82,11 @@ const OneOnOneMeeting = () => {
       })
     }
 
+    createToast({
+      title: "Meeting created successfully",
+      type: "success"
+    })
+    
     navigate("/")
   }
 
