@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useLocation, Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { changeTheme } from '../app/slices/AuthSlice'
+import { getCreatedMeetingBreadCrumbs } from '../utils/breadCrumbs'
 import { firebaseAuth } from '../utils/FirebaseConfig'
 
 const Header = () => {
@@ -18,6 +19,12 @@ const Header = () => {
   const logout = () => {
     signOut(firebaseAuth)
   }
+
+  useEffect(() => {
+    const { pathname } = location
+
+    if (pathname === "/create") setBreadCrumbs(getCreatedMeetingBreadCrumbs(navigate))
+  }, [location, navigate])
 
   const invertTheme = (e: any) => {
     e.stopPropagation()
