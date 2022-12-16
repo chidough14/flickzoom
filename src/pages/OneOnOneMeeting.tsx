@@ -80,14 +80,14 @@ const OneOnOneMeeting = () => {
         maxUsers: 1,
         status: true
       })
-    }
 
-    createToast({
-      title: "Meeting created successfully",
-      type: "success"
-    })
-    
-    navigate("/")
+      createToast({
+        title: "Meeting created successfully",
+        type: "success"
+      })
+      
+      navigate("/")
+    }
   }
 
   return (

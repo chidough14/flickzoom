@@ -9,6 +9,7 @@ import ThemeSelector from './components/ThemeSelector';
 import CreateMeeting from './pages/CreateMeeting';
 import OneOnOneMeeting from './pages/OneOnOneMeeting';
 import { setToasts } from './app/slices/MeetingSlice';
+import VideoConference from './pages/VideoConference';
 
 function App() {
   const dispatch = useAppDispatch()
@@ -43,7 +44,8 @@ function App() {
   }
 
   const removeToast = (removeToast: {id: string}) => {
-    dispatch(setToasts(toasts.filter((toast: any) => toast.id === removeToast.id)))
+    let newToasts = [...toasts]
+    dispatch(setToasts(newToasts.filter((toast: any) => toast.id !== removeToast.id)))
   }
 
   return (
@@ -55,11 +57,12 @@ function App() {
             <Route path='/' element={<Dashboard />} />
             <Route path='/create' element={<CreateMeeting />} />
             <Route path='/create1on1' element={<OneOnOneMeeting />} />
+            <Route path='/createVideoconference' element={<VideoConference />} />
             <Route path='*' element={<Dashboard />} />
           </Routes>
           <EuiGlobalToastList
             toasts={toasts}
-            dismissToast={(e) => removeToast(e)}
+            dismissToast={removeToast}
             toastLifeTimeMs={5000}
           />
         </EuiThemeProvider>
