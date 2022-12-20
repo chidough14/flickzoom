@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useLocation, Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { changeTheme } from '../app/slices/AuthSlice'
-import { getCreatedMeetingBreadCrumbs, getOneOnOneMeetingBreadCrumbs, getVideoConferenceBreadCrumbs } from '../utils/breadCrumbs'
+import { getCreatedMeetingBreadCrumbs, getMeetingsBreadCrumbs, getMyMeetingsBreadCrumbs, getOneOnOneMeetingBreadCrumbs, getVideoConferenceBreadCrumbs } from '../utils/breadCrumbs'
 import { firebaseAuth } from '../utils/FirebaseConfig'
 
 const Header = () => {
@@ -26,6 +26,8 @@ const Header = () => {
     if (pathname === "/create") setBreadCrumbs(getCreatedMeetingBreadCrumbs(navigate))
     else if (pathname === "/create1on1") setBreadCrumbs(getOneOnOneMeetingBreadCrumbs(navigate))
     else if (pathname === "/createVideoconference") setBreadCrumbs(getVideoConferenceBreadCrumbs(navigate))
+    else if (pathname === "/mymeetings") setBreadCrumbs(getMyMeetingsBreadCrumbs(navigate))
+    else if (pathname === "/meetings") setBreadCrumbs(getMeetingsBreadCrumbs(navigate))
   }, [location, navigate])
 
   const invertTheme = (e: any) => {

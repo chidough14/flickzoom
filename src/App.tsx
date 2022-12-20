@@ -10,6 +10,9 @@ import CreateMeeting from './pages/CreateMeeting';
 import OneOnOneMeeting from './pages/OneOnOneMeeting';
 import { setToasts } from './app/slices/MeetingSlice';
 import VideoConference from './pages/VideoConference';
+import MyMeetings from './pages/MyMeetings';
+import Meeting from './pages/Meeting';
+import JoinMeeting from './pages/JoinMeeting';
 
 function App() {
   const dispatch = useAppDispatch()
@@ -58,6 +61,9 @@ function App() {
             <Route path='/create' element={<CreateMeeting />} />
             <Route path='/create1on1' element={<OneOnOneMeeting />} />
             <Route path='/createVideoconference' element={<VideoConference />} />
+            <Route path='/mymeetings' element={<MyMeetings />} />
+            <Route path='/meetings' element={<Meeting />} />
+            <Route path='/join/:id' element={<JoinMeeting />} />
             <Route path='*' element={<Dashboard />} />
           </Routes>
           <EuiGlobalToastList
